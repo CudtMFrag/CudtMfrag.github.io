@@ -1,8 +1,8 @@
 ---
 title: 我为什么选择了 Obsidian 和 OneNote
 tags: 
-date created: 2024 十月 14日, 2:58:51 下午
-date modified: 2025 二月 17日, 3:08:43 下午
+date: 2025-01-02 23:34:58
+updated: 2025-05-20 15:15:09
 share: "true"
 ---
 
