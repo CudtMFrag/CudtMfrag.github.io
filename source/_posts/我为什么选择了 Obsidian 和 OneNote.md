@@ -1,8 +1,8 @@
 ---
 title: 我为什么选择了 Obsidian 和 OneNote
 tags: 
-date: 2025-01-02 23:34:58
-updated: 2025-05-20 15:15:09
+date: 2025-02-17 23:34:58
+updated: 2025-05-20 19:54:18
 share: "true"
 ---
 
