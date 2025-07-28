@@ -113,3 +113,6 @@ feed:
   content: true
   template: ./source/custom.xml
 
+sitemap:
+  path: sitemap.xml
+
