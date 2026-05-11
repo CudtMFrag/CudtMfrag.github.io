@@ -18,9 +18,6 @@ const siteDesc = description || "是博客呀";
   <meta name="description" content={siteDesc} />
   <meta name="author" content="Li Ryle" />
   <title>{title ? `${title} — ${siteTitle}` : siteTitle} — {siteSubtitle}</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet" />
 </head>
 <body>
   <div class="bg-glow"></div>
@@ -132,8 +129,8 @@ const siteDesc = description || "是博客呀";
     --shadow-card-hover: var(--glass-base), var(--shadow-strong);
 
     /* Typography */
-    --font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", "Hiragino Sans", "Microsoft YaHei", sans-serif;
-    --font-mono: "SF Mono", "Cascadia Code", "Fira Code", "JetBrains Mono", monospace;
+    --font-family: "PingFang SC", "PingFang TC", "PingFang HK", "苹方", -apple-system, BlinkMacSystemFont, "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    --font-mono: "SF Mono", "Cascadia Code", "Fira Code", "JetBrains Mono", "PingFang SC", monospace;
 
     --font-thin: 270;
     --font-light: 320;
@@ -235,7 +232,7 @@ const siteDesc = description || "是博客呀";
 
   html {
     font-family: var(--font-family);
-    font-size: 16px;
+    font-size: 17px;
     line-height: var(--line-height);
     color: var(--text-normal);
     -webkit-font-smoothing: antialiased;
