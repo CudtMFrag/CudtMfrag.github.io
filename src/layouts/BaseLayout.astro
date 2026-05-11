@@ -1,0 +1,119 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const siteTitle = "Ryle's bbbblog!!!";
+const siteSubtitle = "Don't be evil.";
+const siteDesc = description || "是博客呀";
+---
+
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={siteDesc} />
+  <meta name="author" content="Li Ryle" />
+  <title>{title ? `${title} - ${siteTitle}` : siteTitle} - {siteSubtitle}</title>
+</head>
+<body>
+  <header>
+    <a href="/" class="logo">{siteTitle}</a>
+    <nav>
+      <a href="/">首页</a>
+      <a href="/archives/">归档</a>
+      <a href="/tags/">标签</a>
+      <a href="/about/">关于</a>
+      <a href="/rss.xml">RSS</a>
+    </nav>
+  </header>
+  <main>
+    <slot />
+  </main>
+  <footer>
+    <p>Copyright &copy; {new Date().getFullYear()} {siteTitle}</p>
+  </footer>
+</body>
+</html>
+<style is:global>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Microsoft YaHei", sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+    background: #f6f7f9;
+  }
+  a { color: #333; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  header {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+    padding: 1.5rem 0; margin-bottom: 2rem; border-bottom: 1px solid #eee;
+  }
+  .logo { font-size: 1.5rem; font-weight: 700; }
+  nav { display: flex; gap: 1.5rem; }
+  nav a { color: #666; font-size: 0.95rem; }
+  nav a:hover { color: #000; }
+
+  main {
+    max-width: 800px; margin: 0 auto; padding: 0 1rem;
+  }
+
+  footer {
+    text-align: center; padding: 3rem 0 1.5rem; color: #999; font-size: 0.85rem;
+  }
+
+  /* Post list */
+  .post-list { display: flex; flex-direction: column; gap: 2rem; }
+  .post-item { padding-bottom: 1.5rem; border-bottom: 1px solid #eee; }
+  .post-item-title { font-size: 1.3rem; font-weight: 600; display: block; margin-bottom: 0.5rem; }
+  .post-item-meta { font-size: 0.8rem; color: #999; display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem; }
+  .post-item-excerpt { color: #555; font-size: 0.95rem; }
+  .tag-badge { background: #f0f0f0; padding: 0.1rem 0.5rem; border-radius: 3px; font-size: 0.75rem; color: #666; }
+  .tag-badge:hover { background: #ddd; text-decoration: none; }
+
+  /* Pagination */
+  .paginator { display: flex; justify-content: center; gap: 1rem; padding: 2rem 0; align-items: center; }
+  .paginator a { padding: 0.4rem 1rem; border: 1px solid #ddd; border-radius: 4px; }
+  .paginator a:hover { background: #f0f0f0; text-decoration: none; }
+  .paginator .current { font-weight: 600; }
+
+  /* Archive */
+  .archive { list-style: none; margin-bottom: 2rem; }
+  .archive li { display: flex; justify-content: space-between; padding: 0.4rem 0; }
+  .archive-date { color: #999; font-size: 0.9rem; min-width: 80px; text-align: right; }
+  .archive-year { font-size: 1.2rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+
+  /* Tags */
+  .tags-cloud { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 2rem 0; }
+  .tags-cloud a { padding: 0.3rem 0.8rem; border: 1px solid #ddd; border-radius: 20px; font-size: 0.9rem; }
+  .tags-cloud a:hover { background: #f0f0f0; text-decoration: none; }
+
+  /* Post content */
+  .post-header { margin-bottom: 1.5rem; }
+  .post-title-main { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .post-date { color: #999; font-size: 0.9rem; }
+  .post-tags-row { display: flex; gap: 0.3rem; margin-top: 0.5rem; }
+
+  /* Typography */
+  article h1 { font-size: 1.8rem; margin: 2rem 0 1rem; }
+  article h2 { font-size: 1.5rem; margin: 1.5rem 0 0.8rem; }
+  article h3 { font-size: 1.2rem; margin: 1.2rem 0 0.6rem; }
+  article p { margin: 0.8rem 0; }
+  article blockquote { border-left: 3px solid #ddd; padding-left: 1rem; color: #666; margin: 1rem 0; }
+  article ul, article ol { padding-left: 1.5rem; margin: 0.8rem 0; }
+  article img { max-width: 100%; border-radius: 4px; }
+  article code { background: #f5f5f5; padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.9em; }
+  article pre { background: #1e1e1e; padding: 1rem; border-radius: 6px; overflow-x: auto; margin: 1rem 0; }
+  article pre code { background: none; padding: 0; color: #d4d4d4; }
+  article table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+  article th, article td { border: 1px solid #ddd; padding: 0.5rem 0.8rem; text-align: left; }
+  article th { background: #f5f5f5; }
+  article hr { border: none; border-top: 1px solid #eee; margin: 1.5rem 0; }
+  article a { color: #0366d6; }
+  article a:hover { text-decoration: underline; }
+</style>

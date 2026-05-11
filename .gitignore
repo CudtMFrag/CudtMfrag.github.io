@@ -3,6 +3,9 @@ Thumbs.db
 db.json
 *.log
 node_modules/
+dist/
+.astro/
+.claude/
 public/
 .deploy*/
 _multiconfig.yml

@@ -1,0 +1,24 @@
+---
+import PostLayout from '@layouts/PostLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => {
+    const date = post.data.date;
+    return {
+      params: {
+        year: String(date.getFullYear()),
+        month: String(date.getMonth() + 1).padStart(2, '0'),
+        day: String(date.getDate()).padStart(2, '0'),
+        title: post.id.replace(/\.md$/, ''),
+      },
+      props: { post },
+    };
+  });
+}
+
+const { post } = Astro.props;
+---
+
+<PostLayout post={post} />

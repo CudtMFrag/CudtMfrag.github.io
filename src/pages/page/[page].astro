@@ -1,0 +1,60 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+function stripMarkdown(text: string): string {
+  return text
+    .replace(/^#+\s/gm, '')
+    .replace(/[*_~`>]/g, '')
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+    .replace(/\n/g, ' ')
+    .trim();
+}
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  const sortedPosts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  const perPage = 10;
+  const totalPages = Math.ceil(sortedPosts.length / perPage);
+
+  return Array.from({ length: totalPages - 1 }, (_, i) => {
+    const pageNum = i + 2;
+    const currentPosts = sortedPosts.slice((pageNum - 1) * perPage, pageNum * perPage);
+    return {
+      params: { page: String(pageNum) },
+      props: { pageNum, totalPages, posts: currentPosts },
+    };
+  });
+}
+
+const { pageNum, totalPages, posts } = Astro.props;
+---
+
+<BaseLayout>
+  <div class="post-list">
+    {posts.map(post => (
+      <div class="post-item">
+        <a class="post-item-title" href={`/${post.data.date.getFullYear()}/${String(post.data.date.getMonth() + 1).padStart(2, '0')}/${String(post.data.date.getDate()).padStart(2, '0')}/${post.id.replace('.md', '')}/`}>
+          {post.data.title}
+        </a>
+        <div class="post-item-meta">
+          <span>{post.data.date.toISOString().slice(0, 10).replace(/-/g, '.')}</span>
+          {post.data.tags.length > 0 && (
+            <span>{post.data.tags.map(tag => <a class="tag-badge" href={`/tags/${tag}/`}>#{tag}</a>)}</span>
+          )}
+        </div>
+        <div class="post-item-excerpt">
+          {post.body ? stripMarkdown(post.body).slice(0, 200) + '...' : ''}
+        </div>
+      </div>
+    ))}
+  </div>
+  <div class="paginator">
+    {pageNum > 1 && <a href={pageNum === 2 ? '/' : `/page/${pageNum - 1}/`}>上一页</a>}
+    <span class="current">{pageNum}</span>
+    <span>/</span>
+    <span>{totalPages}</span>
+    {pageNum < totalPages && <a href={`/page/${pageNum + 1}/`}>下一页</a>}
+  </div>
+</BaseLayout>

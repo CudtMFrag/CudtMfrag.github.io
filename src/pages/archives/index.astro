@@ -1,0 +1,35 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const postsByYear = new Map<number, typeof sortedPosts>();
+for (const post of sortedPosts) {
+  const year = post.data.date.getFullYear();
+  if (!postsByYear.has(year)) postsByYear.set(year, []);
+  postsByYear.get(year)!.push(post);
+}
+const years = [...postsByYear.entries()].sort((a, b) => b[0] - a[0]);
+---
+
+<BaseLayout title="归档">
+  {years.map(([year, yearPosts]) => (
+    <section>
+      <h2 class="archive-year">{year}</h2>
+      <ul class="archive">
+        {yearPosts.map(post => (
+          <li>
+            <a href={`/${post.data.date.getFullYear()}/${String(post.data.date.getMonth() + 1).padStart(2, '0')}/${String(post.data.date.getDate()).padStart(2, '0')}/${post.id.replace('.md', '')}/`}>
+              {post.data.title}
+            </a>
+            <span class="archive-date">
+              {post.data.date.toISOString().slice(0, 10).replace(/-/g, '.')}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</BaseLayout>
