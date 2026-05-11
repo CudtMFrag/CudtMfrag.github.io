@@ -1,0 +1,44 @@
+---
+// 用 giscus.app 配置后替换下面的 repo 信息
+// https://giscus.app/zh-CN
+---
+
+<section class="giscus-wrapper">
+  <h2 class="giscus-title">评论</h2>
+  <div class="giscus"></div>
+</section>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.setAttribute('data-repo', 'CudtMFrag/CudtMFrag.github.io');
+    script.setAttribute('data-repo-id', 'R_kgDOOOOOOO');
+    script.setAttribute('data-category', 'Announcements');
+    script.setAttribute('data-category-id', 'DIC_kwDOOOOOOO');
+    script.setAttribute('data-mapping', 'pathname');
+    script.setAttribute('data-strict', '0');
+    script.setAttribute('data-reactions-enabled', '1');
+    script.setAttribute('data-emit-metadata', '0');
+    script.setAttribute('data-input-position', 'top');
+    script.setAttribute('data-theme', 'preferred_color_scheme');
+    script.setAttribute('data-lang', 'zh-CN');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+    document.querySelector('.giscus')?.appendChild(script);
+  });
+</script>
+
+<style>
+  .giscus-wrapper {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+  }
+  .giscus-title {
+    font-size: 1.25em;
+    font-weight: var(--h3-weight);
+    margin-bottom: 1rem;
+    color: var(--h2-color);
+  }
+</style>

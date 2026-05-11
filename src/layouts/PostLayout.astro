@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import GiscusComment from '@components/GiscusComment.astro';
 import type { CollectionEntry } from 'astro:content';
 
 export interface Props {
@@ -18,7 +19,7 @@ const permalink = `/${post.data.date.getFullYear()}/${String(post.data.date.getM
       <h1 class="post-title-main">{post.data.title}</h1>
       <div class="post-date">
         {post.data.date.toISOString().slice(0, 10)}
-        {post.data.updated && <> (更新于 {post.data.updated.toISOString().slice(0, 10)})</>}
+        {post.data.updated && <span> &middot; 更新于 {post.data.updated.toISOString().slice(0, 10)}</span>}
       </div>
       {post.data.tags.length > 0 && (
         <div class="post-tags-row">
@@ -28,7 +29,15 @@ const permalink = `/${post.data.date.getFullYear()}/${String(post.data.date.getM
     </div>
     <Content />
   </article>
-  <nav style="margin-top: 2rem;">
-    <a href="javascript:history.back()">&larr; 返回</a>
+
+  <nav style="margin-top: 3rem;">
+    <a class="post-back" href="javascript:history.back()">
+      <svg width="8" height="14" viewBox="0 0 8 14">
+        <path d="M7 1L1 7l6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      返回
+    </a>
   </nav>
+
+  <GiscusComment />
 </BaseLayout>
