@@ -1,21 +1,35 @@
 ---
-// 用 giscus.app 配置后替换下面的 repo 信息
-// https://giscus.app/zh-CN
+// Giscus 评论组件
+// 配置: https://giscus.app/zh-CN
+// 需要先安装 GitHub App: https://github.com/apps/giscus
 ---
 
-<section class="giscus-wrapper">
+<section class="giscus-wrapper" id="giscus-comments">
   <h2 class="giscus-title">评论</h2>
   <div class="giscus"></div>
+  <noscript>
+    <p class="giscus-fallback">启用 JavaScript 以查看评论。</p>
+  </noscript>
 </section>
 
 <script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
+  (function() {
+    // 本地开发时不加载 Giscus（localhost 未在 giscus 白名单中）
+    const host = window.location.hostname;
+    if (host === 'localhost' || host === '127.0.0.1') {
+      const placeholder = document.createElement('p');
+      placeholder.className = 'giscus-placeholder';
+      placeholder.textContent = '本地开发模式，评论组件已隐藏。部署后将加载 Giscus 评论。';
+      document.querySelector('.giscus')?.replaceWith(placeholder);
+      return;
+    }
+
     const script = document.createElement('script');
     script.src = 'https://giscus.app/client.js';
     script.setAttribute('data-repo', 'CudtMFrag/CudtMFrag.github.io');
-    script.setAttribute('data-repo-id', 'R_kgDOOOOOOO');
+    script.setAttribute('data-repo-id', 'R_kgDON6eDyQ');
     script.setAttribute('data-category', 'Announcements');
-    script.setAttribute('data-category-id', 'DIC_kwDOOOOOOO');
+    script.setAttribute('data-category-id', 'DIC_kwDON6eDyc4C8x4x');
     script.setAttribute('data-mapping', 'pathname');
     script.setAttribute('data-strict', '0');
     script.setAttribute('data-reactions-enabled', '1');
@@ -26,7 +40,7 @@
     script.setAttribute('crossorigin', 'anonymous');
     script.async = true;
     document.querySelector('.giscus')?.appendChild(script);
-  });
+  })();
 </script>
 
 <style>
@@ -40,5 +54,10 @@
     font-weight: var(--h3-weight);
     margin-bottom: 1rem;
     color: var(--h2-color);
+  }
+  .giscus-placeholder,
+  .giscus-fallback {
+    color: var(--text-faint);
+    font-size: var(--font-small);
   }
 </style>
