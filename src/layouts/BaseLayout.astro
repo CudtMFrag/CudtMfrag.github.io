@@ -372,11 +372,34 @@ const siteDesc = description || "是博客呀";
   }
 
   /* ===========================
+     Tag page header
+     =========================== */
+  .tag-page-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .tag-page-title {
+    font-size: 1.5rem;
+    font-weight: var(--h2-weight);
+    color: var(--color-base-100);
+    letter-spacing: -0.02em;
+  }
+  .tag-page-count {
+    margin-top: 0.25rem;
+    color: var(--text-faint);
+    font-size: var(--font-small);
+  }
+
+  /* ===========================
      Tags
      =========================== */
   .tag-badge {
-    display: inline-block;
-    background: var(--border-color);
+    display: inline-flex;
+    align-items: center;
+    background: oklch(from var(--color-accent) l c h / 0.05);
+    border: 1px solid oklch(from var(--color-accent) l c h / 0.12);
+    border-left: 2px solid oklch(from var(--color-accent) l c h / 0.4);
     padding: 0.2rem 0.625rem;
     border-radius: var(--radius-xs);
     font-size: 0.75rem;
@@ -385,8 +408,10 @@ const siteDesc = description || "是博客呀";
     transition: all var(--anim-fast) var(--ease-out);
   }
   .tag-badge:hover {
-    background: var(--border-strong);
-    color: var(--text-normal);
+    background: oklch(from var(--color-accent) l c h / 0.1);
+    border-color: oklch(from var(--color-accent) l c h / 0.25);
+    border-left-color: var(--color-accent);
+    color: var(--color-accent);
     text-decoration: none;
   }
 
@@ -402,8 +427,11 @@ const siteDesc = description || "是博客呀";
     margin: 2rem 0;
   }
   .tags-cloud a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
     padding: 0.4rem 1rem;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border-strong);
     border-radius: var(--radius-l);
     font-size: var(--font-small);
     font-weight: var(--font-medium);
@@ -411,10 +439,10 @@ const siteDesc = description || "是博客呀";
     transition: all var(--anim-fast) var(--ease-out);
   }
   .tags-cloud a:hover {
-    background: var(--border-color);
-    color: var(--text-normal);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background: oklch(from var(--color-accent) l c h / 0.06);
     text-decoration: none;
-    border-color: var(--border-strong);
   }
 
   /* ===========================

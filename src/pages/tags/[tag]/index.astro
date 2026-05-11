@@ -26,7 +26,10 @@ const { tag, posts } = Astro.props;
 ---
 
 <BaseLayout title={`#${tag}`}>
-  <h2 style="margin-bottom: 1.5rem; font-size: 1.3rem;">#{tag} — {posts.length} 篇</h2>
+  <div class="tag-page-header">
+    <h2 class="tag-page-title">#{tag}</h2>
+    <p class="tag-page-count">共 {posts.length} 篇文章</p>
+  </div>
   <div class="post-list">
     {posts.map(post => (
       <div class="post-item">
